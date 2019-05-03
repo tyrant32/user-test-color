@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersFavoriteColorsTableSeeder::class);
+        $this->call(FavoriteColorsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
 }

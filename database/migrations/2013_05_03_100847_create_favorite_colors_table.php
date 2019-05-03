@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 /**
- * Class UserFavoriteColors
+ * Class CreateFavoriteColorsTable.
  */
-class UserFavoriteColors extends Migration
+class CreateFavoriteColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class UserFavoriteColors extends Migration
      */
     public function up()
     {
-        Schema::create('user_favorite_colors', function (Blueprint $table) {
+        Schema::create('favorite_colors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->timestamps();
@@ -31,6 +31,6 @@ class UserFavoriteColors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_favorite_colors');
+        Schema::drop('favorite_colors');
     }
 }

@@ -28,8 +28,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\App\Repositories\UserFavoriteColorsRepository::class, \App\Repositories\UserFavoriteColorsRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\UserRepository::class, \App\Repositories\UserRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\FavoriteColorRepository::class, \App\Repositories\FavoriteColorRepositoryEloquent::class);
         //:end-bindings:
     }
 }

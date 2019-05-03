@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Entities\FavoriteColor;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -35,4 +37,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /**
+     * @return BelongsToMany
+     */
+    public function favoriteColors()
+    {
+        return $this->belongsToMany(FavoriteColor::class);
+    }
 }

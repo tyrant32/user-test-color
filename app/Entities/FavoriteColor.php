@@ -8,11 +8,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class UserFavoriteColors.
+ * Class FavoriteColor.
  *
  * @package namespace App\Entities;
  */
-class UserFavoriteColors extends Model implements Transformable
+class FavoriteColor extends Model implements Transformable
 {
     use TransformableTrait;
     

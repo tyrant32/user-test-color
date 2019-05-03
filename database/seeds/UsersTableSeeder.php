@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
+use App\Entities\FavoriteColor;
 use App\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use App\Entities\UserFavoriteColors;
 
 /**
  * Class UsersTableSeeder
@@ -30,7 +30,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'favorite_color_id' => UserFavoriteColors::inRandomOrder()->first()->id,
             'first_name'        => 'Demo',
             'last_name'         => 'User',
             'email'             => 'demo@demo.com',
@@ -42,7 +41,6 @@ class UsersTableSeeder extends Seeder
             for ($i = 0; $i < $this->maxUsers; $i++)
             {
                 User::create([
-                    'favorite_color_id' => UserFavoriteColors::inRandomOrder()->first()->id,
                     'first_name'        => $this->faker->firstName,
                     'last_name'         => $this->faker->lastName,
                     'email'             => $this->faker->email,
@@ -50,5 +48,13 @@ class UsersTableSeeder extends Seeder
                 ]);
             }
         }
+    
+        $users = User::all();
+    
+        foreach ($users as $user)
+        {
+            $user->favoriteColors()->sync(FavoriteColor::pluck('id')->toArray(), false);
+        }
+        
     }
 }

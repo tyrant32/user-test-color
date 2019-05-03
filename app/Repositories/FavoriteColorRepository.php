@@ -6,11 +6,11 @@ namespace App\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface UserFavoriteColorsRepository.
+ * Interface FavoriteColorRepository.
  *
  * @package namespace App\Repositories;
  */
-interface UserFavoriteColorsRepository extends RepositoryInterface
+interface FavoriteColorRepository extends RepositoryInterface
 {
     //
 }

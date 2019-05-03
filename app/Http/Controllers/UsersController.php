@@ -36,6 +36,7 @@ class UsersController extends Controller
      */
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
+        $this->middleware('auth');
         $this->repository = $repository;
         $this->validator = $validator;
     }
@@ -48,11 +49,12 @@ class UsersController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        $users = $this->repository
+            ->with('favoriteColors')
+            ->paginate();
         
         if (request()->wantsJson())
         {
-            
             return response()->json([
                 'data' => $users,
             ]);

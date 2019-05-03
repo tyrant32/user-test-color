@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use App\Entities\UserFavoriteColors;
+use App\Entities\FavoriteColor;
 use Illuminate\Database\Seeder;
 
 /**
- * Class UsersFavoriteColorsTableSeeder
+ * Class FavoriteColorsTableSeeder
  */
-class UsersFavoriteColorsTableSeeder extends Seeder
+class FavoriteColorsTableSeeder extends Seeder
 {
     private $colors = [
         'blue',
@@ -27,7 +27,7 @@ class UsersFavoriteColorsTableSeeder extends Seeder
     {
         foreach ($this->colors as $color)
         {
-            UserFavoriteColors::create([
+            FavoriteColor::create([
                 'name' => $color,
             ]);
         }

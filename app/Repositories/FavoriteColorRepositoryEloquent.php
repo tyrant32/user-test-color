@@ -5,16 +5,15 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Entities\UserFavoriteColors;
-use App\Validators\UserFavoriteColorsValidator;
+use App\Entities\FavoriteColor;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 /**
- * Class UserFavoriteColorsRepositoryEloquent.
+ * Class FavoriteColorRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UserFavoriteColorsRepositoryEloquent extends BaseRepository implements UserFavoriteColorsRepository
+class FavoriteColorRepositoryEloquent extends BaseRepository implements FavoriteColorRepository
 {
     /**
      * Specify Model class name
@@ -23,18 +22,7 @@ class UserFavoriteColorsRepositoryEloquent extends BaseRepository implements Use
      */
     public function model()
     {
-        return UserFavoriteColors::class;
-    }
-    
-    /**
-     * Specify Validator class name
-     *
-     * @return mixed
-     */
-    public function validator()
-    {
-        
-        return UserFavoriteColorsValidator::class;
+        return FavoriteColor::class;
     }
     
     /**
