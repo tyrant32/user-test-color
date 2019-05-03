@@ -34,19 +34,26 @@ class UsersListCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        if ($this->request['first_name'])
+        if (isset($this->request['first_name']))
         {
             $model = $model->where('first_name', 'like', '%'.$this->request['first_name'].'%');
         }
-        
-        if ($this->request['last_name'])
+    
+        if (isset($this->request['last_name']))
         {
             $model = $model->where('last_name', 'like', '%'.$this->request['last_name'].'%');
         }
-        
-        if ($this->request['email'])
+    
+        if (isset($this->request['email']))
         {
             $model = $model->where('email', 'like', '%'.$this->request['email'].'%');
+        }
+    
+        if (isset($this->request['favorite_colors']) && $this->request['favorite_colors'])
+        {
+            $model->whereHas('favoriteColors', function ($q) {
+                $q->where('favorite_colors.id', '=', $this->request['favorite_colors']);
+            });
         }
         
         return $model;

@@ -63,6 +63,7 @@ class UsersController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $users = $this->repository
+            ->pushCriteria(new UsersListCriteria(request()->all()))
             ->with('favoriteColors')
             ->paginate();
         $favoriteColors = $this->favoriteColorsRepository->pluck('name', 'id');
