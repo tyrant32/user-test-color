@@ -28,6 +28,8 @@ This are must have requirements, your application needs to fulfill:
 Run Project
 php composer.phar install
 npm install
+php artisan migrate
+php artisan db:seed
 ---
 Laravel 5.5.*
 ---
