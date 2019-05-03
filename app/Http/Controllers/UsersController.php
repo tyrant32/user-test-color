@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Criteria\Ajax\UsersListCriteria;
 use App\Repositories\FavoriteColorRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -234,8 +235,11 @@ class UsersController extends Controller
         if (request()->wantsJson())
         {
             $users = $this->repository
+                ->pushCriteria(new UsersListCriteria(request()->all()))
                 ->with('favoriteColors')
                 ->paginate();
+            
+            $users->setPath(route('home', \request()->all()));
             
             try
             {
