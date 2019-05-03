@@ -72,7 +72,10 @@
         </nav>
 
         @yield('content')
+
     </div>
+
+    @include('layouts.footer')
 
     <!-- Scripts -->
     <script src="{{ env('APP_URL').elixir('/js/app.js') }}"></script>
