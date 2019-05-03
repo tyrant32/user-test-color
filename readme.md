@@ -30,6 +30,7 @@ php composer.phar install
 npm install
 php artisan migrate
 php artisan db:seed
+npm run prod
 ---
 Laravel 5.5.*
 ---

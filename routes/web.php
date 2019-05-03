@@ -22,3 +22,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'UsersController@index')->name('home');
+Route::post('/ajax/users/list', 'UsersController@ajaxUsersList')->name('ajax.users.list');

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\FavoriteColorRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -24,6 +26,11 @@ class UsersController extends Controller
     protected $repository;
     
     /**
+     * @var FavoriteColorRepository
+     */
+    protected $favoriteColorsRepository;
+    
+    /**
      * @var UserValidator
      */
     protected $validator;
@@ -32,12 +39,17 @@ class UsersController extends Controller
      * UsersController constructor.
      *
      * @param UserRepository $repository
+     * @param FavoriteColorRepository $favoriteColorsRepository
      * @param UserValidator $validator
      */
-    public function __construct(UserRepository $repository, UserValidator $validator)
-    {
+    public function __construct(
+        UserRepository $repository,
+        FavoriteColorRepository $favoriteColorsRepository,
+        UserValidator $validator
+    ) {
         $this->middleware('auth');
         $this->repository = $repository;
+        $this->favoriteColorsRepository = $favoriteColorsRepository;
         $this->validator = $validator;
     }
     
@@ -52,6 +64,7 @@ class UsersController extends Controller
         $users = $this->repository
             ->with('favoriteColors')
             ->paginate();
+        $favoriteColors = $this->favoriteColorsRepository->pluck('name', 'id');
         
         if (request()->wantsJson())
         {
@@ -60,7 +73,7 @@ class UsersController extends Controller
             ]);
         }
         
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'favoriteColors'));
     }
     
     /**
@@ -70,7 +83,6 @@ class UsersController extends Controller
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function store(UserCreateRequest $request)
     {
@@ -151,7 +163,6 @@ class UsersController extends Controller
      *
      * @return Response
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update(UserUpdateRequest $request, $id)
     {
@@ -211,5 +222,37 @@ class UsersController extends Controller
         }
         
         return redirect()->back()->with('message', 'User deleted.');
+    }
+    
+    /**
+     * @return JsonResponse
+     */
+    public function ajaxUsersList()
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        
+        if (request()->wantsJson())
+        {
+            $users = $this->repository
+                ->with('favoriteColors')
+                ->paginate();
+            
+            try
+            {
+                return response()->json([
+                    'success' => true,
+                    'html'    => view('users._partials.table-list', compact('users'))
+                        ->render(),
+                ]);
+            } catch (\Throwable $e)
+            {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
+        
+        return response()->json([]);
     }
 }
