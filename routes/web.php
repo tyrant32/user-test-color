@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'UsersController@index')->name('home');
-Route::get('/home', 'UsersController@index')->name('home');
 
 Route::post('/ajax/users/list', 'UsersController@ajaxUsersList')->name('ajax.users.list');
 Route::post('/ajax/users/modal', 'UsersController@ajaxUsersModal')->name('ajax.users.modal');
