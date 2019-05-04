@@ -41,4 +41,28 @@ $(document).ready(function () {
             });
         });
     }
+
+    if ($('.ajax-users-list-wrapper table tbody tr').length) {
+        $('.ajax-users-list-wrapper table tbody tr').on('click', function () {
+            var currentUser = $(this).attr('id');
+
+            $.ajax({
+                url: usersModalAjaxUrl,
+                method: 'post',
+                data: {user: currentUser, _token: currentToken},
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        console.log($('.ajax-modal-wrapper'));
+                        $('.ajax-modal-wrapper').html(res.html);
+                        $('.' + currentUser + '-modal-button').trigger('click');
+                    }
+                    if (res.error) {
+                        console.log(res.message)
+                    }
+                }
+            });
+
+        });
+    }
 });
