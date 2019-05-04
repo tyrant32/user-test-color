@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Criteria\Ajax;
+namespace App\Criteria;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
@@ -58,6 +58,6 @@ class UsersListCriteria implements CriteriaInterface
             });
         }
     
-        return $model->orderBy('users.email');
+        return $model->orderBy('users.id');
     }
 }

@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Criteria\Ajax\UsersListCriteria;
+use App\Criteria\UsersListCriteria;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\FavoriteColorRepository;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
 
 /**
  * Class UsersController.
