@@ -7,6 +7,10 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+.footer .navbar-default {
+  padding-top: 3%;
+}
+
 .ajax-users-list-wrapper table tbody tr:hover {
   cursor: pointer;
 }
