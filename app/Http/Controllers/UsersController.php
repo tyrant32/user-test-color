@@ -257,6 +257,40 @@ class UsersController extends Controller
                 ]);
             }
         }
+    
+        return response()->json([]);
+    }
+    
+    /**
+     * @return JsonResponse
+     */
+    public function ajaxUsersModal()
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        
+        if (request()->wantsJson())
+        {
+            $userID = str_replace('user-', '', \request('user'));
+            
+            $user = $this->repository
+                ->with('favoriteColors')
+                ->find($userID);
+            
+            try
+            {
+                return response()->json([
+                    'success' => true,
+                    'html'    => view('users._partials.modal', compact('user'))
+                        ->render(),
+                ]);
+            } catch (\Throwable $e)
+            {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
         
         return response()->json([]);
     }

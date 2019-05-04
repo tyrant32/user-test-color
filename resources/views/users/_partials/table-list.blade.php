@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     @foreach($users as $user)
-        <tr>
+        <tr id="user-{{ $user->id }}">
             <td>{{ $user->id }}</td>
             <td>{{ $user->first_name }}</td>
             <td>{{ $user->last_name }}</td>
@@ -27,3 +27,8 @@
     </tr>
     </tbody>
 </table>
+
+<script type="text/javascript">
+    var usersModalAjaxUrl = '{{ route('ajax.users.modal') }}';
+    var currentToken = '{{ csrf_token() }}';
+</script>

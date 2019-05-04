@@ -42,4 +42,6 @@
             </div>
         </div>
     </div>
+
+    <div class="ajax-modal-wrapper"></div>
 @endsection
