@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg user-{{$user->id}}-modal-button" data-toggle="modal" data-target="#modelId">
+<button type="button" class="btn btn-primary btn-lg user-{{$user->id}}-modal-button hidden" data-toggle="modal" data-target="#modelId">
     Launch
 </button>
 
