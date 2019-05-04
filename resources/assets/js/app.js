@@ -6,21 +6,9 @@
 
 require('./bootstrap');
 
-// window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-//
-// const app = new Vue({
-//     el: '#app'
-// });
-
 $(document).ready(function () {
+
+    // Users Filter Ajax Call
     if ($('#users-list-filter').length) {
         $('#users-list-filter').on('submit', function (e) {
             e.preventDefault();
@@ -32,16 +20,20 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (res) {
                     if (res.success) {
-                        $('.ajax-users-list-wrapper').html(res.html)
+                        $('.ajax-users-list-wrapper').html(res.html);
+                        $('.messages').html('<div class="alert alert-success" role="alert">Users has been filtered.</div>');
+                        $('.messages .alert').fadeOut(3500);
                     }
                     if (res.error) {
-                        console.log(res.message)
+                        $('.messages').html('<div class="alert alert-danger" role="alert">Something is wrong please try again later...</div>');
+                        $('.messages .alert').fadeOut(3500);
                     }
                 }
             });
         });
     }
 
+    // Show Modal Ajax Call
     if ($('.ajax-users-list-wrapper table tbody tr').length) {
         $('.ajax-users-list-wrapper table tbody tr').on('click', function () {
             var currentUser = $(this).attr('id');
@@ -53,12 +45,12 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (res) {
                     if (res.success) {
-                        console.log($('.ajax-modal-wrapper'));
                         $('.ajax-modal-wrapper').html(res.html);
                         $('.' + currentUser + '-modal-button').trigger('click');
                     }
                     if (res.error) {
-                        console.log(res.message)
+                        $('.messages').html('<div class="alert alert-danger" role="alert">Something is wrong please try again later...</div>');
+                        $('.messages .alert').fadeOut(3500);
                     }
                 }
             });

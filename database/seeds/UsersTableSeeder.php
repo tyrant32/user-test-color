@@ -35,8 +35,8 @@ class UsersTableSeeder extends Seeder
             'email'             => 'demo@demo.com',
             'password'          => bcrypt('demo')
         ]);
-        
-        if (is_int($this->maxUsers) && $this->maxUsers)
+    
+        if (is_int($this->maxUsers) && $this->maxUsers && app()->environment() !== 'production')
         {
             for ($i = 0; $i < $this->maxUsers; $i++)
             {

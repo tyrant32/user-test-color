@@ -62,10 +62,12 @@ class UsersController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+    
         $users = $this->repository
             ->pushCriteria(new UsersListCriteria(request()->all()))
             ->with('favoriteColors')
             ->paginate();
+    
         $favoriteColors = $this->favoriteColorsRepository->pluck('name', 'id');
         
         if (request()->wantsJson())
@@ -270,14 +272,14 @@ class UsersController extends Controller
         
         if (request()->wantsJson())
         {
-            $userID = str_replace('user-', '', \request('user'));
-            
-            $user = $this->repository
-                ->with('favoriteColors')
-                ->find($userID);
-            
             try
             {
+                $userID = str_replace('user-', '', \request('user'));
+        
+                $user = $this->repository
+                    ->with('favoriteColors')
+                    ->find($userID);
+                
                 return response()->json([
                     'success' => true,
                     'html'    => view('users._partials.modal', compact('user'))

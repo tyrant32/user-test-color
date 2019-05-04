@@ -15,28 +15,12 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Users List
+                <div class="row">
+                    <div class="col-md-12 messages"></div>
+                </div>
 
-                        <div class="pull-right">
-                            Total Users: <strong>{{ $users->total() }}</strong>
-                            Showing: <strong>{{ $users->count() }}</strong>
-                        </div>
-                    </div>
-
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <div class="ajax-users-list-wrapper">
-                            @include('users._partials.table-list')
-                        </div>
-
-                    </div>
+                <div class="ajax-users-list-wrapper">
+                    @include('users._partials.table-list')
                 </div>
 
             </div>
