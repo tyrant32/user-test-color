@@ -34,6 +34,8 @@ class UsersListCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
+        $model = $model->select('users.id', 'users.first_name', 'users.last_name', 'users.email');
+        
         if (isset($this->request['first_name']))
         {
             $model = $model->where('first_name', 'like', '%'.$this->request['first_name'].'%');
@@ -55,7 +57,7 @@ class UsersListCriteria implements CriteriaInterface
                 $q->where('favorite_colors.id', '=', $this->request['favorite_colors']);
             });
         }
-        
-        return $model;
+    
+        return $model->orderBy('users.email');
     }
 }
