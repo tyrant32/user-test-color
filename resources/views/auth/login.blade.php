@@ -4,6 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
+            <div class="alert alert-info" role="alert">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <strong>Email:</strong>&nbsp;demo@demo.com
+                <strong>Password</strong>&nbsp;demo
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Login
