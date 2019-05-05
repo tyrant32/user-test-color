@@ -45,9 +45,9 @@ This are must have requirements, your application needs to fulfill:
 
 ---
 
-Run Project
+#Run Project
 
-php composer.phar install
+php composer install
 
 npm install
 
@@ -58,7 +58,13 @@ php artisan db:seed
 npm run prod
 
 ---
-Laravel 5.5.*
+
+#Demo: [https://ivan-ivanov.info/user-test-color](https://ivan-ivanov.info/user-test-color "User Test Color")
+
+---
+
+#Laravel 5.5.*
+
 ---
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
