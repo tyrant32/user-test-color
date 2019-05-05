@@ -3,7 +3,7 @@ or create a new one.
 
 Notice: Use plain PHP or Any PHP framework of your choice!
 
-#Features
+# Features
 
     1. Backend:
     
@@ -23,11 +23,11 @@ Notice: Use plain PHP or Any PHP framework of your choice!
             c. When clicking on the column containing the color preference, it should display
                 respective colors in a box or modal.
                 
-#Tips
+# Tips
 
     ● We like bitwise
     
-#Requirements:
+# Requirements:
 
 This are must have requirements, your application needs to fulfill:
 
@@ -45,7 +45,7 @@ This are must have requirements, your application needs to fulfill:
 
 ---
 
-#Run Project
+# Run Project
 
 php composer install
 
@@ -59,11 +59,11 @@ npm run prod
 
 ---
 
-#Demo: [https://ivan-ivanov.info/user-test-color](https://ivan-ivanov.info/user-test-color "User Test Color")
+# Demo: [https://ivan-ivanov.info/user-test-color](https://ivan-ivanov.info/user-test-color "User Test Color")
 
 ---
 
-#Laravel 5.5.*
+# Laravel 5.5.*
 
 ---
 
