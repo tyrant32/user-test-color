@@ -10,10 +10,27 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    {{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
-
     <link href="{{ env('APP_URL').elixir('/css/app.css') }}" rel="stylesheet">
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-49877637-5', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <script charset="UTF-8" src="//cdn.sendpulse.com/js/push/0927b1021edd06fce1168602821edf4f_1.js" async></script>
 </head>
 <body>
     <div id="app">
@@ -81,5 +98,8 @@
 
     <!-- Scripts -->
     <script src="{{ env('APP_URL').elixir('/js/app.js') }}"></script>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c9a69d26077b916"></script>
 </body>
 </html>
