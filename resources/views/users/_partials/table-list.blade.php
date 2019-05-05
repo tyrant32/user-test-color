@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        Users List
+        <i class="fa fa-users" aria-hidden="true"></i>&nbsp;Users List
 
         <div class="pull-right">
             Total Users: <strong>{{ $users->total() }}</strong>

@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    {{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+
     <link href="{{ env('APP_URL').elixir('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
