@@ -8,6 +8,12 @@ require('./bootstrap');
 
 $(document).ready(function () {
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     // Users Filter Ajax Call
     if ($('#users-list-filter').length) {
         $('#users-list-filter').on('submit', function (e) {
@@ -41,7 +47,7 @@ $(document).ready(function () {
             $.ajax({
                 url: usersModalAjaxUrl,
                 method: 'post',
-                data: {user: currentUser, _token: currentToken},
+                data: {user: currentUser},
                 dataType: 'json',
                 success: function (res) {
                     if (res.success) {
@@ -57,4 +63,27 @@ $(document).ready(function () {
 
         });
     }
+
+    // Add New User Ajax Call
+    if ($('#add_new_user').length) {
+        $('#add_new_user').on('click', function () {
+            $.ajax({
+                url: usersCreateAjaxUrl,
+                method: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        $('.ajax-modal-wrapper').html(res.html);
+                        $('.' + currentUser + '-modal-button').trigger('click');
+                    }
+                    if (res.error) {
+                        $('.messages').html('<div class="alert alert-danger" role="alert">Something is wrong please try again later...</div>');
+                        $('.messages .alert').fadeOut(3500);
+                    }
+                }
+            });
+
+        });
+    }
+
 });
