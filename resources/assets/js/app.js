@@ -80,6 +80,9 @@ $(document).ready(function () {
                     if (res.data) {
                         $('.add_new_user_form_wrapper .alert-danger, .alert-info').addClass('hidden');
                         $('#add_new_user').modal('hide');
+                        $('.messages').html('<div class="alert alert-success" role="alert">'+res.message+'</div>');
+                        $('.messages .alert').fadeOut(3500);
+                        $('#add_new_user_form input').val('');
                     }
                     if (res.error) {
                         $.each(res.message, function(key, value){

@@ -21,6 +21,7 @@
 
 <div class="form-group">
     {!! Form::submit('Search', ['class' => 'form-control btn btn-primary']) !!}
+    <a href="{{ route('home') }}" class="btn btn-default">Clear</a>
 </div>
 
 {!! Form::close() !!}

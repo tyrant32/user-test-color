@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Ajax;
 
+use App\Criteria\UsersListCriteria;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\FavoriteColorRepository;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use Faker\Factory;
+use Faker\Generator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -35,6 +37,9 @@ class UsersController extends Controller
      */
     protected $validator;
     
+    /**
+     * @var Generator
+     */
     protected $faker;
     
     /**
@@ -43,6 +48,7 @@ class UsersController extends Controller
      * @param UserRepository $repository
      * @param FavoriteColorRepository $favoriteColorsRepository
      * @param UserValidator $validator
+     * @param Factory $faker
      */
     public function __construct(
         UserRepository $repository,
@@ -50,11 +56,80 @@ class UsersController extends Controller
         UserValidator $validator,
         Factory $faker
     ) {
-        $this->middleware('auth');
+        $this->middleware(['auth','throttle:1000']);
         $this->repository = $repository;
         $this->favoriteColorsRepository = $favoriteColorsRepository;
         $this->validator = $validator;
         $this->faker = $faker::create();
+    }
+    
+    /**
+     * @return JsonResponse
+     */
+    public function index()
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        
+        if (request()->wantsJson())
+        {
+            $users = $this->repository
+                ->pushCriteria(new UsersListCriteria(request()->all()))
+                ->with('favoriteColors')
+                ->paginate();
+            
+            $users->setPath(route('home', \request()->all()));
+            
+            try
+            {
+                return response()->json([
+                    'success' => true,
+                    'html'    => view('users._partials.table-list', compact('users'))
+                        ->render(),
+                ]);
+            } catch (\Throwable $e)
+            {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
+        
+        return response()->json([]);
+    }
+    
+    /**
+     * @return JsonResponse
+     */
+    public function modal()
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        
+        if (request()->wantsJson())
+        {
+            try
+            {
+                $userID = str_replace('user-', '', \request('user'));
+                
+                $user = $this->repository
+                    ->with('favoriteColors')
+                    ->find($userID);
+                
+                return response()->json([
+                    'success' => true,
+                    'html'    => view('users._partials.modal', compact('user'))
+                        ->render(),
+                ]);
+            } catch (\Throwable $e)
+            {
+                return response()->json([
+                    'error'   => true,
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
+        
+        return response()->json([]);
     }
     
     /**
@@ -75,6 +150,11 @@ class UsersController extends Controller
             ]);
             
             $user = $this->repository->create(\request()->all());
+            
+            if(\request('favorite_colors'))
+            {
+                $user->favoriteColors()->sync(\request('favorite_colors'));
+            }
             
             $response = [
                 'message' => 'User created.',
@@ -100,70 +180,5 @@ class UsersController extends Controller
             
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
-    }
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UserUpdateRequest $request
-     * @param string $id
-     *
-     * @return Response
-     *
-     */
-    public function update($id)
-    {
-        try
-        {
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
-            
-            $user = $this->repository->update($request->all(), $id);
-            
-            $response = [
-                'message' => 'User updated.',
-                'data'    => $user->toArray(),
-            ];
-            
-            if ($request->wantsJson())
-            {
-                return response()->json($response);
-            }
-            
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e)
-        {
-            
-            if ($request->wantsJson())
-            {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-            
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
-    }
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        $deleted = $this->repository->delete($id);
-        
-        if (request()->wantsJson())
-        {
-            return response()->json([
-                'message' => 'User deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-        
-        return redirect()->back()->with('message', 'User deleted.');
     }
 }

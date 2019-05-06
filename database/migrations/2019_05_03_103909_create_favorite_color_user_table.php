@@ -21,7 +21,6 @@ class CreateFavoriteColorUserTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('favorite_color_id');
-            $table->timestamps();
             
             $table->foreign('user_id')
                 ->references('id')

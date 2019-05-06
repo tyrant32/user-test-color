@@ -36,16 +36,6 @@ class UsersTableSeeder extends Seeder
             'password'          => bcrypt('demo')
         ]);
     
-        for ($i = 0; $i < 20; $i++)
-        {
-            User::create([
-                'first_name'        => $this->faker->firstName,
-                'last_name'         => $this->faker->lastName,
-                'email'             => $this->faker->email,
-                'password'          => bcrypt($this->faker->password(6, 10))
-            ]);
-        }
-    
         if (is_int($this->maxUsers) && $this->maxUsers && app()->environment() !== 'production')
         {
             for ($i = 0; $i < $this->maxUsers; $i++)
@@ -58,13 +48,5 @@ class UsersTableSeeder extends Seeder
                 ]);
             }
         }
-    
-        $users = User::all();
-    
-        foreach ($users as $user)
-        {
-            $user->favoriteColors()->sync(FavoriteColor::pluck('id')->toArray(), false);
-        }
-        
     }
 }
