@@ -11,7 +11,7 @@ use Illuminate\Database\Seeder;
  */
 class UsersTableSeeder extends Seeder
 {
-    private $maxUsers = 100;
+    private $maxUsers = 80;
     private $faker;
     
     /**
@@ -35,6 +35,16 @@ class UsersTableSeeder extends Seeder
             'email'             => 'demo@demo.com',
             'password'          => bcrypt('demo')
         ]);
+    
+        for ($i = 0; $i < 20; $i++)
+        {
+            User::create([
+                'first_name'        => $this->faker->firstName,
+                'last_name'         => $this->faker->lastName,
+                'email'             => $this->faker->email,
+                'password'          => bcrypt($this->faker->password(6, 10))
+            ]);
+        }
     
         if (is_int($this->maxUsers) && $this->maxUsers && app()->environment() !== 'production')
         {

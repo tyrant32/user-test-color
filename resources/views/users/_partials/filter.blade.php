@@ -24,7 +24,3 @@
 </div>
 
 {!! Form::close() !!}
-
-<script type="text/javascript">
-    var usersListAjaxUrl = '{{ route('ajax.users.list') }}';
-</script>

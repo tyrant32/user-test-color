@@ -6,7 +6,9 @@
             <div class="col-md-8 col-md-offset-2">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Filter</div>
+                    <div class="panel-heading">
+                        <i class="fa fa-search" aria-hidden="true"></i>&nbsp;Filter
+                    </div>
 
                     <div class="panel-body">
 
@@ -21,9 +23,9 @@
 
                 <div class="row">
                     <div class="col-md-12 form-group">
-                        <a name="add_new_user" id="add_new_user" class="btn btn-success pull-right" href="#" role="button">
-                            Add New User
-                        </a>
+
+                        @include('users.modals.add-new-user')
+
                     </div>
                 </div>
 
@@ -38,4 +40,10 @@
     </div>
 
     <div class="ajax-modal-wrapper"></div>
+
+    <script type="text/javascript">
+        var usersModalAjaxUrl = '{{ route('ajax.users.modal') }}';
+        var usersListAjaxUrl = '{{ route('ajax.users.list') }}';
+        var usersStoreAjaxUrl = '{{ route('ajax.users.store') }}';
+    </script>
 @endsection

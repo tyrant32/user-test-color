@@ -21,3 +21,8 @@ Route::get('/', 'UsersController@index')->name('home');
 
 Route::post('/ajax/users/list', 'UsersController@ajaxUsersList')->name('ajax.users.list');
 Route::post('/ajax/users/modal', 'UsersController@ajaxUsersModal')->name('ajax.users.modal');
+
+Route::namespace('Ajax')->prefix('ajax')->group(function () {
+    Route::post('users/store', 'UsersController@store')->name('ajax.users.store');
+    Route::post('users/update', 'UsersController@update')->name('ajax.users.update');
+});

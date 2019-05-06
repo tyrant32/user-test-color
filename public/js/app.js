@@ -819,7 +819,32 @@ $(document).ready(function () {
     }
 
     // Add New User Ajax Call
+    if ($('#add_new_user_form').length) {
+        $('#add_new_user_form').on('submit', function (e) {
+            e.preventDefault();
 
+            $.ajax({
+                url: usersStoreAjaxUrl,
+                method: 'post',
+                data: $('#add_new_user_form').serializeArray(),
+                dataType: 'json',
+                success: function success(res) {
+                    $('.add_new_user_form_wrapper .alert-danger').html('');
+
+                    if (res.data) {
+                        $('.add_new_user_form_wrapper .alert-danger, .alert-info').addClass('hidden');
+                        $('#add_new_user').modal('hide');
+                    }
+                    if (res.error) {
+                        $.each(res.message, function (key, value) {
+                            $('.add_new_user_form_wrapper .alert-danger, .alert-info').removeClass('hidden');
+                            $('.add_new_user_form_wrapper .alert-danger').append('<p>' + value + '</p>');
+                        });
+                    }
+                }
+            });
+        });
+    }
 });
 
 /***/ }),
