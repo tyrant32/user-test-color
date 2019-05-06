@@ -45,5 +45,4 @@
 
 <script type="text/javascript">
     var usersModalAjaxUrl = '{{ route('ajax.users.modal') }}';
-    var currentToken = '{{ csrf_token() }}';
 </script>

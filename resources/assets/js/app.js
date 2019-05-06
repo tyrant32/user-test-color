@@ -8,6 +8,12 @@ require('./bootstrap');
 
 $(document).ready(function () {
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     // Users Filter Ajax Call
     if ($('#users-list-filter').length) {
         $('#users-list-filter').on('submit', function (e) {
@@ -41,7 +47,7 @@ $(document).ready(function () {
             $.ajax({
                 url: usersModalAjaxUrl,
                 method: 'post',
-                data: {user: currentUser, _token: currentToken},
+                data: {user: currentUser},
                 dataType: 'json',
                 success: function (res) {
                     if (res.success) {
@@ -57,4 +63,8 @@ $(document).ready(function () {
 
         });
     }
+
+    // Add New User Ajax Call
+
+
 });
