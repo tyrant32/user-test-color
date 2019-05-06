@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link href="{{ env('APP_URL').elixir('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ env('APP_URL').mix('/css/app.css') }}" rel="stylesheet">
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -97,7 +97,7 @@
     @include('layouts.footer')
 
     <!-- Scripts -->
-    <script src="{{ env('APP_URL').elixir('/js/app.js') }}"></script>
+    <script src="{{ env('APP_URL').mix('/js/app.js') }}"></script>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c9a69d26077b916"></script>
