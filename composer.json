@@ -1,7 +1,7 @@
 {
     "name": "tyrant32/user-test-color",
     "description": "Users Test Color.",
-    "keywords": ["framework", "laravel", "users", "test", "ajax", "crud"],
+    "keywords": ["framework", "laravel", "users", "test", "ajax"],
     "license": "MIT",
     "type": "project",
     "require": {
