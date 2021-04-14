@@ -16,6 +16,4 @@
         ga('send', 'pageview');
 
     </script>
-
-    <script charset="UTF-8" src="//cdn.sendpulse.com/js/push/0927b1021edd06fce1168602821edf4f_1.js" async></script>
 @endif

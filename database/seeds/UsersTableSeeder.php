@@ -11,7 +11,7 @@ use Illuminate\Database\Seeder;
  */
 class UsersTableSeeder extends Seeder
 {
-    private $maxUsers = 80;
+    private $maxUsers = 0;
     private $faker;
     
     /**
