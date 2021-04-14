@@ -59,7 +59,7 @@ npm run prod
 
 ---
 
-# Demo: [https://ivan-ivanov.info/user-test-color](https://ivan-ivanov.info/user-test-color "User Test Color")
+# Demo: [https://user-test-color.ivanivanov.me](https://user-test-color.ivanivanov.me "User Test Color")
 
 ---
 
