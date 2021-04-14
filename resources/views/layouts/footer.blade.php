@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="addthis_inline_follow_toolbox"></div>
+{{--                <div class="addthis_inline_follow_toolbox"></div>--}}
             </div>
             <div class="col-md-4"></div>
         </div>
